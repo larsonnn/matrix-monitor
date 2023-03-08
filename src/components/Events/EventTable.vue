@@ -17,7 +17,8 @@ import { eventStore } from '../../store';
             <tr v-for="event in eventStore.events">
                 <td>{{ event.name }}</td>
                 <td>{{ event.type }}</td>
-                <td class="clickable" @click="() => this.log(event.parameters?.event)">{{ event.parameters?.event?.event_id
+                <td class="clickable" @click="() => $emit('show', event.parameters?.event)">{{
+                    event.parameters?.event?.event_id
                     ||
                     "ROOM (no event given)" }}</td>
                 <td>{{ event.checkInTs }}</td>
@@ -28,14 +29,7 @@ import { eventStore } from '../../store';
 
 <script>
 export default {
-    methods: {
-        log(evt) {
-            let printable = evt;
-            if (isProxy(evt)) printable = toRaw(evt);
-            console.log(printable);
-
-        }
-    }
+    emits: ['show'],
 }
 </script>
 

@@ -15,15 +15,14 @@ import { matrixStore } from "../store";
     <div>
         <Form @submit="login">
             <FormElementContainer>
-                <TextInput label="Server" :value="this.server" autocomplete="url"
-                    @change:input="$value => this.server = $value" />
+                <TextInput label="Server" :value="server" autocomplete="url" @change:input="$value => server = $value" />
             </FormElementContainer>
             <FormElementContainer>
-                <TextInput label="E-Mail" :value="this.username" autocomplete="email"
-                    @change:input="$value => this.username = $value" />
+                <TextInput label="E-Mail" :value="username" autocomplete="email"
+                    @change:input="$value => username = $value" />
             </FormElementContainer>
             <FormElementContainer>
-                <PasswordInput label="Password" :value="this.password" @change:input="$value => this.password = $value" />
+                <PasswordInput label="Password" :value="password" @change:input="$value => password = $value" />
             </FormElementContainer>
             <FormElementContainer>
                 <SubmitInput text="Login" />
