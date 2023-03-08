@@ -6,9 +6,6 @@
 
 <style scoped>
 div {
-    margin: 2.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 80vh;
 }
 </style>

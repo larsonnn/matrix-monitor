@@ -14,22 +14,22 @@ div {
     justify-content: center;
 }
 
-div>>>input {
+div :deep(input) {
     width: 100%;
     padding: .5rem;
 }
 
-div>>>label {
+div :deep(label) {
     margin-bottom: 12px;
     display: block;
 }
 
 @media (prefers-color-scheme: dark) {
-    div>>>* {
+    div :deep(*) {
         color: hwb(0 86% 14%);
     }
 
-    div>>>input {
+    div :deep(input) {
         border: 1px solid #30363d;
         background-color: #010409;
         font-family: monospace;
