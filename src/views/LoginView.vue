@@ -8,6 +8,7 @@ import FormElementContainer from '../components/FormElementContainer.vue';
 import TextInput from '../components/Inputs/TextInput.vue';
 import PasswordInput from '../components/Inputs/PasswordInput.vue';
 import SubmitInput from '../components/Inputs/SubmitInput.vue';
+import { matrixStore } from "../store";
 </script>
 
 <template>
@@ -55,12 +56,16 @@ export default {
                 },
                 password: this.password,
             }
-            ).finally(() => {
-                // store update
-            })
-
+            ).then((res) => {
+                matrixStore.isLoggedIn = !!res.access_token;
+                matrixStore.auth = res;
+                localStorage.setItem('mon_auth', JSON.stringify(res));
+            });
+            this.clear();
+        },
+        clear() {
             this.username = "";
-            this.password = "";
+            this.password = ""
         }
     }
 }
