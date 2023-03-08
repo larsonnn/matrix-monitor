@@ -60,6 +60,7 @@ export default {
                 matrixStore.isLoggedIn = !!res.access_token;
                 matrixStore.auth = res;
                 localStorage.setItem('mon_auth', JSON.stringify(res));
+                mx.loginWithToken(res);
             });
             this.clear();
         },
