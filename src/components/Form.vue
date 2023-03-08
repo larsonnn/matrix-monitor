@@ -3,9 +3,7 @@
         $event.preventDefault();
         $emit('submit');
     }">
-        <div>
-            <slot />
-        </div>
+        <slot />
     </form>
 </template>
 <script>

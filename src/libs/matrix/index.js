@@ -1,3 +1,5 @@
+import {  matrixStore} from "../../store";
+
 let client = undefined
 
 const loginWithToken = async (authData) => {
@@ -20,8 +22,16 @@ const loginWithToken = async (authData) => {
     }
 };
 
+const logout = async () => {
+    await client?.logout();
+    localStorage.clear();
+    matrixStore.isLoggedIn = false;
+    matrixStore.auth = {}
+}
+
 
 export default {
     client,
-    loginWithToken
+    loginWithToken,
+    logout
 }
