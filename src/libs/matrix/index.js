@@ -1,4 +1,4 @@
-import { UserEvent } from "matrix-js-sdk";
+import { PollEvent } from "matrix-js-sdk";
 import { eventStore, matrixStore} from "../../store";
 
 let client = undefined
@@ -29,6 +29,15 @@ const USER_EVENTS = [
     "User.lastPresenceTs",
 ]
 
+const POLL_EVENTS = [
+    "Poll.new",
+    "Poll.end",
+    "Poll.update",
+    "Poll.Responses",
+    "Poll.Destroy",
+    "Poll.UndecryptableRelations",
+]
+
 const eventLog = (name, type, ...content) => {
     eventStore.events.push({
         name,
@@ -54,6 +63,9 @@ const loginWithToken = async (authData) => {
         });
         USER_EVENTS.forEach((name) => {
             client.on(name, (...args) => eventLog(name, "user", args));
+        });
+        POLL_EVENTS.forEach((name) => {
+            client.on(name, (...args) => eventLog(name, "poll", args));
         });
         await client.startClient({ initialSyncLimit: 12 });
 
