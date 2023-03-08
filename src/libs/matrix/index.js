@@ -38,12 +38,14 @@ const POLL_EVENTS = [
     "Poll.UndecryptableRelations",
 ]
 
-const eventLog = (name, type, ...content) => {
-    eventStore.events.push({
+const eventLog = (name, type, ...event) => {
+    const evt = {
         name,
         type,
-        parameters: content
-    })
+        parameters: event[0][0],
+        checkInTs: Date.now()
+    };
+    eventStore.events.push(evt);
 }
 
 const loginWithToken = async (authData) => {
