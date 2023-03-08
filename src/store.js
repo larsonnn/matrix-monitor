@@ -6,5 +6,10 @@ export const matrixStore = reactive({
     auth: {}
   });
 export const appStore = reactive({
-    state: 'before'
+    state: 'before',
+    openDropdown: ''
+});
+
+export const eventStore = reactive({
+  events: []
 })

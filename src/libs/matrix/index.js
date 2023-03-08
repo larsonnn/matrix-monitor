@@ -1,6 +1,41 @@
-import {  matrixStore} from "../../store";
+import { UserEvent } from "matrix-js-sdk";
+import { eventStore, matrixStore} from "../../store";
 
 let client = undefined
+
+const ROOM_EVENTS = [
+    "Room.myMembership",
+    "Room.tags",
+    "Room.accountData",
+    "Room.receipt",
+    "Room.name",
+    "Room.redaction",
+    "Room.redactionCancelled",
+    "Room.localEchoUpdated",
+    "Room.timeline",
+    "Room.timelineReset",
+    "Room.TimelineRefresh",
+    "Room.OldStateUpdated",
+    "Room.CurrentStateUpdated",
+    "Room.historyImportedWithinTimeline",
+    "Room.UnreadNotifications",
+]
+
+const USER_EVENTS = [
+    "User.displayName",
+    "User.avatarUrl",
+    "User.presence",
+    "User.currentlyActive",
+    "User.lastPresenceTs",
+]
+
+const eventLog = (name, type, ...content) => {
+    eventStore.events.push({
+        name,
+        type,
+        parameters: content
+    })
+}
 
 const loginWithToken = async (authData) => {
     {
@@ -13,6 +48,12 @@ const loginWithToken = async (authData) => {
                 verificationMethods: [
                     "m.sas.v1"
                 ],
+        });
+        ROOM_EVENTS.forEach((name) => {
+            client.on(name, (...args) => eventLog(name, "room", args));
+        });
+        USER_EVENTS.forEach((name) => {
+            client.on(name, (...args) => eventLog(name, "user", args));
         });
         await client.startClient({ initialSyncLimit: 12 });
 
