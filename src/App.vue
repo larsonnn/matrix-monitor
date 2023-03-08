@@ -25,17 +25,12 @@ export default {
       mx.loginWithToken(authData).then(() => {
         matrixStore.isLoggedIn = true;
         matrixStore.auth = authData;
+      }).finally(() => {
         appStore.state = 'created'
-      })
+      });
+    } else {
+      appStore.state = 'created'
     }
   },
 }
 </script>
-
-<style>
-@media (prefers-color-scheme: dark) {
-  body {
-    background-color: black;
-  }
-}
-</style>

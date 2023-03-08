@@ -1,3 +1,11 @@
 body {
   margin: 0;
+  font-family: monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+      color: hwb(0 86% 14%);
+      background-color: #010409;
+  }
 }
