@@ -82,6 +82,7 @@ const logout = async () => {
     localStorage.clear();
     matrixStore.isLoggedIn = false;
     matrixStore.auth = {}
+    location.reload();
 }
 
 
